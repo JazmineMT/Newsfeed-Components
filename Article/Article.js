@@ -85,11 +85,28 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'An addtional paragraph',
+    date: 'Jan 2st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
 /* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: 
 
+ 
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -111,3 +128,55 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+
+const articles = document.querySelector('.articles')
+
+function  articleMaker(data){
+
+const articleDiv = document.createElement('div')
+const title = document.createElement('h2')
+const date = document.createElement('p')
+const para = document.createElement('p')
+const para2 = document.createElement('p')
+const para3 = document.createElement('p')
+const button = document.createElement('span','article-open')
+
+articleDiv.appendChild(title)
+articleDiv.appendChild(date)
+articleDiv.appendChild(para)
+articleDiv.appendChild(para2)
+articleDiv.appendChild(para3)
+articleDiv.appendChild(button)
+
+articleDiv.classList.add('article')
+date.classList.add('date')
+button.classList.add('expandButton')
+
+
+title.textContent = data.title
+date.textContent = data.date
+para.textContent = data.firstParagraph
+para2.textContent = data.secondParagraph
+para3.textContent = data.thirdParagraph
+
+button.addEventListener ('click', event => {
+  
+articleDiv.classList.toggle('article-open')
+articleDiv.classList.toggle('toggle-on')
+
+})
+
+// console.log(articleDiv);
+return articleDiv
+}
+
+
+// const theTestArticle = articleMaker({ title: 'foo', date: 'bar' , firstParagraph:'blah', secondParagraph: 'blah', thirdParagraph:'blah'})
+
+// console.log('these are the articles created with articleMaker', theTestArticle)
+
+data.forEach(articleData =>{
+  const articleDiv = articleMaker(articleData)
+  articles.appendChild(articleDiv)
+
+})
